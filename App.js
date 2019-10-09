@@ -1,10 +1,10 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, Dimensions, SafeAreaView, Platform, } from 'react-native';
+import { Image, StyleSheet, Text, View, Dimensions, SafeAreaView, Platform, Button, TouchableOpacity} from 'react-native';
 import { Images, Profiles } from './App/Themes';
 
 export default class App extends React.Component {
   
-    constructor() {
+  constructor() {
     super();
 
     var haroldProfile = Profiles.harold;
@@ -16,10 +16,20 @@ export default class App extends React.Component {
     };
   }
 
+  onPress = () => {
+    var newProfile = Profiles.random()
+    this.setState({
+      profileImage: newProfile.image,
+      name: newProfile.name,
+      age: newProfile.age,
+      occupation: newProfile.occupation
+    })
+  }
 
   render() {
 
     var {height, width} = Dimensions.get('window');
+
     
     return (
 
@@ -80,12 +90,15 @@ export default class App extends React.Component {
                 source={ require('./App/Images/boost.png') }
               />
             </View>
-            <View style={{backgroundColor: 'white', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', height: '100%', borderRadius: height/2}}>
+            <TouchableOpacity 
+              onPress={() => this.onPress()} 
+              style={{backgroundColor: 'white', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', height: '100%', borderRadius: height/2}}
+            >
               <Image
                 style={{resizeMode: 'contain', height: '45%'}} 
                 source={ require('./App/Images/like.png') }
               />
-            </View>
+            </TouchableOpacity>
             <View style={{backgroundColor: 'white', aspectRatio: 1, alignItems: 'center', justifyContent: 'center', height: '80%', borderRadius: height/2}}>
               <Image
                 style={{resizeMode: 'contain', height: '65%'}} 
